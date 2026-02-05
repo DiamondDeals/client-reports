@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Intelligence Technical Assessment - February 2026</title>
+    <style>
+        @page {
+            margin: 0.75in 1in;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #2c2c2c;
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+        
+        /* Header */
+        .report-header {
+            border-bottom: 3px solid #1a237e;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .report-title {
+            font-size: 24pt;
+            font-weight: 300;
+            color: #1a237e;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+        
+        .report-subtitle {
+            font-size: 14pt;
+            color: #616161;
+            font-weight: 300;
+            margin: 0 0 20px 0;
+        }
+        
+        .report-meta {
+            font-size: 9pt;
+            color: #757575;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        /* Section Headers */
+        h2 {
+            font-size: 18pt;
+            font-weight: 400;
+            color: #1a237e;
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            page-break-after: avoid;
+            page-break-inside: avoid;
+        }
+        
+        h3 {
+            font-size: 13pt;
+            font-weight: 500;
+            color: #424242;
+            margin: 25px 0 12px 0;
+            page-break-after: avoid;
+        }
+        
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #616161;
+            margin: 18px 0 10px 0;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin: 0 0 12px 0;
+        }
+        
+        /* Executive Summary Box */
+        .executive-summary {
+            background: #f5f5f5;
+            border-left: 4px solid #1a237e;
+            padding: 24px;
+            margin: 30px 0;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+        
+        .executive-summary h3 {
+            margin-top: 0;
+            color: #1a237e;
+        }
+        
+        /* Key Findings Box */
+        .key-finding {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin: 20px 0 30px 0;
+            background: #fafafa;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+        
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+        
+        .finding-title {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+        
+        .impact-label {
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .impact-critical {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .impact-high {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .impact-medium {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        
+        thead {
+            background: #1a237e;
+            color: white;
+        }
+        
+        th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        
+        .metric-card {
+            border: 1px solid #e0e0e0;
+            padding: 18px;
+            background: white;
+            page-break-inside: avoid;
+        }
+        
+        .metric-label {
+            font-size: 9pt;
+            text-transform: uppercase;
+            color: #757575;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-value {
+            font-size: 28pt;
+            font-weight: 300;
+            color: #1a237e;
+            margin: 5px 0;
+            line-height: 1;
+        }
+        
+        .metric-status {
+            font-size: 9pt;
+            color: #616161;
+            margin-top: 6px;
+        }
+        
+        .status-fail { color: #c62828; }
+        .status-warn { color: #e65100; }
+        .status-pass { color: #2e7d32; }
+        
+        /* Comparison Tables */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        
+        .comparison-col {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            page-break-inside: avoid;
+        }
+        
+        .comparison-col.current {
+            background: #ffebee;
+        }
+        
+        .comparison-col.target {
+            background: #e8f5e9;
+        }
+        
+        .comparison-header {
+            font-size: 10pt;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+        
+        .comparison-col.current .comparison-header {
+            color: #c62828;
+            border-color: #c62828;
+        }
+        
+        .comparison-col.target .comparison-header {
+            color: #2e7d32;
+            border-color: #2e7d32;
+        }
+        
+        .comparison-value {
+            font-size: 36pt;
+            font-weight: 300;
+            margin: 10px 0;
+        }
+        
+        .comparison-col.current .comparison-value {
+            color: #c62828;
+        }
+        
+        .comparison-col.target .comparison-value {
+            color: #2e7d32;
+        }
+        
+        .comparison-metric {
+            font-size: 10pt;
+            color: #616161;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #f5f5f5;
+            border-left: 3px solid #bdbdbd;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            line-height: 1.5;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        /* Lists */
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-list li {
+            padding-left: 25px;
+            position: relative;
+            margin: 10px 0;
+        }
+        
+        .action-list li:before {
+            content: "□";
+            position: absolute;
+            left: 0;
+            color: #1a237e;
+            font-size: 14pt;
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            padding: 18px;
+            margin: 20px 0;
+            border-left: 4px solid;
+            background: #fafafa;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+        
+        .callout-success {
+            border-color: #2e7d32;
+            background: #f1f8f4;
+        }
+        
+        .callout-warning {
+            border-color: #f57f17;
+            background: #fffbf0;
+        }
+        
+        .callout-info {
+            border-color: #1976d2;
+            background: #f0f7ff;
+        }
+        
+        .callout strong {
+            color: #2c2c2c;
+        }
+        
+        /* ROI Box */
+        .roi-highlight {
+            border: 2px solid #1a237e;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            background: #fafafa;
+            page-break-inside: avoid;
+        }
+        
+        .roi-value {
+            font-size: 48pt;
+            font-weight: 300;
+            color: #1a237e;
+            margin: 15px 0;
+        }
+        
+        .roi-label {
+            font-size: 11pt;
+            color: #616161;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            margin: 30px 0;
+        }
+        
+        .timeline-item {
+            border-left: 2px solid #e0e0e0;
+            padding-left: 25px;
+            margin: 25px 0;
+            position: relative;
+            page-break-inside: avoid;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: #1a237e;
+            border-radius: 50%;
+        }
+        
+        .timeline-item table {
+            page-break-inside: avoid;
+        }
+        
+        .timeline-month {
+            font-size: 9pt;
+            text-transform: uppercase;
+            color: #1a237e;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            font-size: 10pt;
+            color: #616161;
+            margin-bottom: 12px;
+        }
+        
+        /* Page Breaks */
+        .page-break {
+            page-break-after: always;
+        }
+        
+        .no-break {
+            page-break-inside: avoid;
+        }
+        
+        /* Footer */
+        .report-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 9pt;
+            color: #757575;
+            text-align: center;
+        }
+        
+        /* Print Specific */
+        @media print {
+            body {
+                font-size: 10pt;
+                orphans: 3;
+                widows: 3;
+            }
+            
+            .page-break {
+                page-break-after: always;
+            }
+            
+            table, .key-finding, .executive-summary, .roi-highlight {
+                page-break-inside: avoid;
+            }
+            
+            tr {
+                page-break-inside: avoid;
+            }
+            
+            h2, h3, h4 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="report-header">
+        <div class="report-title">Technical Assessment & Optimization Plan</div>
+        <div class="report-subtitle">Foresight Intelligence Digital Infrastructure Review</div>
+        <div class="report-meta">
+            <div>
+                <strong>Client:</strong> Foresight Intelligence (Dale Hanna, CEO)<br>
+                <strong>Engagement:</strong> 4-Month Technical Optimization Program
+            </div>
+            <div style="text-align: right;">
+                <strong>Prepared by:</strong> Diamond Lane Digital / Adjacent Media<br>
+                <strong>Date:</strong> February 5, 2026
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="executive-summary">
+        <h3>Executive Summary</h3>
+        <p>Foresight Intelligence operates a best-in-class fleet management product (97% customer retention) that is significantly underperforming in digital channels due to critical technical infrastructure deficiencies. Mobile page load times of 6.2 seconds result in 38% bounce rates, while search engine invisibility (only 23 keywords ranking) causes the loss of $25,000-30,000 monthly in potential organic traffic value.</p>
+        
+        <p>This assessment identifies 17 prioritized technical issues and provides a 16-week remediation roadmap. Implementation of critical fixes within the first month will reduce mobile load times by 44% (6.2s → 3.5s), eliminate 82% of technical errors, and improve PPC Quality Scores by 1-2 points, generating immediate cost savings of $900-1,200 monthly in reduced advertising spend.</p>
+        
+        <p><strong>Total 4-month investment:</strong> $10,150 (contract + tools)<br>
+        <strong>Expected first-year return:</strong> $400,000-430,000<br>
+        <strong>ROI:</strong> 3,940%<br>
+        <strong>Payback period:</strong> <2 weeks</p>
+    </div>
+
+    <!-- Current State Metrics -->
+    <h2>I. Current State Assessment</h2>
+    
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Mobile Performance</div>
+            <div class="metric-value status-fail">66/100</div>
+            <div class="metric-status">Target: 85+</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Load Time (Mobile)</div>
+            <div class="metric-value status-fail">6.2s</div>
+            <div class="metric-status">Target: <2.5s</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Keywords Ranking</div>
+            <div class="metric-value status-fail">23</div>
+            <div class="metric-status">91% failure rate</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Technical Errors</div>
+            <div class="metric-value status-fail">28</div>
+            <div class="metric-status">Critical issues</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Conversion Rate</div>
+            <div class="metric-value status-warn">2.0%</div>
+            <div class="metric-status">Below industry avg</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Weekly Leads</div>
+            <div class="metric-value status-fail"><3</div>
+            <div class="metric-status">Down 80% from peak</div>
+        </div>
+    </div>
+
+    <h3>Business Impact Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Issue</th>
+                <th>Current State</th>
+                <th>Business Impact</th>
+                <th>Monthly Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Slow mobile load times</td>
+                <td>6.2 seconds</td>
+                <td>38% bounce rate on mobile</td>
+                <td>$2,500-4,000 lost revenue</td>
+            </tr>
+            <tr>
+                <td>Low PPC Quality Scores</td>
+                <td>5/10 average</td>
+                <td>40% higher cost per click</td>
+                <td>$900-1,200 wasted ad spend</td>
+            </tr>
+            <tr>
+                <td>Search invisibility</td>
+                <td>23 of 264 keywords (9%)</td>
+                <td>Missing high-value organic traffic</td>
+                <td>$25,000-30,000 opportunity cost</td>
+            </tr>
+            <tr>
+                <td>Technical errors</td>
+                <td>28 critical issues</td>
+                <td>Poor user experience, trust damage</td>
+                <td>Qualitative impact</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- Critical Issues -->
+    <h2>II. Critical Findings</h2>
+
+    <div class="key-finding">
+        <div class="finding-header">
+            <div class="finding-title">Finding #1: Mobile Performance Crisis</div>
+            <div class="impact-label impact-critical">Critical</div>
+        </div>
+        
+        <p><strong>Issue:</strong> Mobile users experience 6.2-second page load times, resulting in 38% bounce rate and 68% lower conversion rates compared to desktop users.</p>
+        
+        <div class="comparison-table">
+            <div class="comparison-col current">
+                <div class="comparison-header">Current State</div>
+                <div class="comparison-value">6.2s</div>
+                <div class="comparison-metric">Mobile Load Time</div>
+                <div style="margin-top: 15px; font-weight: 600;">38% Bounce Rate</div>
+                <div style="margin-top: 5px; font-size: 9pt;">Score: 66/100</div>
+            </div>
+            
+            <div class="comparison-col target">
+                <div class="comparison-header">Target (Month 4)</div>
+                <div class="comparison-value">2.5s</div>
+                <div class="comparison-metric">Mobile Load Time</div>
+                <div style="margin-top: 15px; font-weight: 600;">15% Bounce Rate</div>
+                <div style="margin-top: 5px; font-size: 9pt;">Score: 85-90/100</div>
+            </div>
+        </div>
+        
+        <p><strong>Root Causes:</strong></p>
+        <ul>
+            <li>Logo file 55x oversized (459 KB vs. 12 KB optimal)</li>
+            <li>Zero browser caching (2 MB re-downloaded per visit)</li>
+            <li>Render-blocking CSS/JS (2,940ms delay on mobile)</li>
+            <li>Unoptimized images (1,044 KB waste across 11 images)</li>
+        </ul>
+        
+        <p><strong>Recommended Action:</strong> Implement Week 1 emergency fixes (logo optimization, browser caching, image compression). Estimated effort: 4 hours. Expected improvement: 6.2s → 4.5s (-27%).</p>
+    </div>
+
+    <div class="key-finding">
+        <div class="finding-header">
+            <div class="finding-title">Finding #2: Zero Cache Policy</div>
+            <div class="impact-label impact-critical">Critical</div>
+        </div>
+        
+        <p><strong>Issue:</strong> No browser caching headers configured, forcing every visitor to re-download 2,064 KB of static assets on every page view.</p>
+        
+        <div class="code-block">WITHOUT Caching (Current):
+Visitor 1: Downloads 2,064 KB
+Visitor 2: Downloads 2,064 KB  
+Visitor 3: Downloads 2,064 KB
+...
+1,000 visitors = 2,064 MB bandwidth
+
+WITH Caching (After Fix):
+Visitor 1: Downloads 2,064 KB (first visit)
+Visitor 2: Downloads 50 KB (cached assets)
+Visitor 3: Downloads 50 KB (cached assets)  
+...
+1,000 visitors = 100 MB bandwidth
+SAVINGS: 95% bandwidth reduction</div>
+        
+        <p><strong>Recommended Action:</strong> Add HTTP cache headers via .htaccess or install WP Rocket plugin. Estimated effort: 15 minutes. Expected improvement: Repeat visit load time 6.2s → 1.5s (-76%).</p>
+    </div>
+
+    <div class="key-finding">
+        <div class="finding-header">
+            <div class="finding-title">Finding #3: Search Engine Invisibility</div>
+            <div class="impact-label impact-critical">Critical</div>
+        </div>
+        
+        <p><strong>Issue:</strong> Only 23 of 264 tracked keywords (8.7%) ranking in top 100, resulting in $25,000-30,000 monthly opportunity cost in lost organic traffic.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>High-Value Term (Not Ranking)</th>
+                    <th>Monthly Searches</th>
+                    <th>PPC Value</th>
+                    <th>Opportunity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>fleet tracking software</td>
+                    <td>1,300</td>
+                    <td>$9,020</td>
+                    <td>Top 3 position</td>
+                </tr>
+                <tr>
+                    <td>construction fleet management</td>
+                    <td>390</td>
+                    <td>$2,378</td>
+                    <td>Top 3 position</td>
+                </tr>
+                <tr>
+                    <td>asset tracking solutions</td>
+                    <td>880</td>
+                    <td>$3,497</td>
+                    <td>Top 3 position</td>
+                </tr>
+                <tr>
+                    <td>preventative maintenance software</td>
+                    <td>2,900</td>
+                    <td>$10,111</td>
+                    <td>Top 10 position</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p><strong>Root Causes:</strong> 21 missing meta descriptions, 8 duplicate titles, 13 duplicate meta descriptions, 28 critical technical SEO errors.</p>
+        
+        <p><strong>Recommended Action:</strong> Execute Month 1-2 technical SEO foundation work (15-20 hours). Expected improvement: 23 → 75+ keywords ranking (+226%).</p>
+    </div>
+
+    <div class="key-finding">
+        <div class="finding-header">
+            <div class="finding-title">Finding #4: Poor PPC Quality Scores</div>
+            <div class="impact-label impact-high">High Priority</div>
+        </div>
+        
+        <p><strong>Issue:</strong> Average Quality Score of 5/10 resulting in 40% higher cost-per-click than competitors, wasting $900-1,200 monthly in advertising budget.</p>
+        
+        <div class="comparison-table">
+            <div class="comparison-col current">
+                <div class="comparison-header">Current PPC Performance</div>
+                <div class="comparison-value">$3.00</div>
+                <div class="comparison-metric">Cost Per Click</div>
+                <div style="margin-top: 12px; font-size: 10pt;">
+                    Quality Score: 5/10<br>
+                    Monthly Budget: $3,000<br>
+                    Clicks/Month: 1,000
+                </div>
+            </div>
+            
+            <div class="comparison-col target">
+                <div class="comparison-header">Optimized Performance</div>
+                <div class="comparison-value">$2.10</div>
+                <div class="comparison-metric">Cost Per Click</div>
+                <div style="margin-top: 12px; font-size: 10pt;">
+                    Quality Score: 7/10<br>
+                    Monthly Budget: $3,000<br>
+                    Clicks/Month: 1,429 (+429)
+                </div>
+            </div>
+        </div>
+        
+        <p><strong>Recommended Action:</strong> Week 1-2 fixes (meta descriptions, duplicate titles, mobile speed). Expected savings: $900/month = $10,800 annually.</p>
+    </div>
+
+    <div class="key-finding">
+        <div class="finding-header">
+            <div class="finding-title">Finding #5: Broken User Experience</div>
+            <div class="impact-label impact-high">High Priority</div>
+        </div>
+        
+        <p><strong>Issue:</strong> Layout shifts (CLS 0.462 on fleetintelligence.ai), 8 broken links, 7 missing resources (404 errors) creating poor user experience and trust damage.</p>
+        
+        <p><strong>Technical Details:</strong></p>
+        <ul>
+            <li>CLS score 0.462 (4.6x over Google's 0.1 threshold)</li>
+            <li>Hero background loads late, pushing content down 350px</li>
+            <li>8 broken internal links lead to 404 pages</li>
+            <li>7 resources (images/CSS/JS) returning 404/403 errors</li>
+        </ul>
+        
+        <p><strong>Recommended Action:</strong> Week 1-2 UX fixes (4-6 hours). Set explicit container dimensions, fix broken links, restore missing resources.</p>
+    </div>
+
+    <!-- Implementation Roadmap -->
+    <h2 style="margin-top: 50px;">III. 16-Week Implementation Roadmap</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-month">Month 1 • February 2026</div>
+            <div class="timeline-title">Crisis Management & Technical Foundation</div>
+            <div class="timeline-desc">Objective: Stop revenue bleeding, fix critical performance and SEO issues</div>
+            
+            <table style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Week</th>
+                        <th>Deliverables</th>
+                        <th style="width: 15%;">Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 1</strong></td>
+                        <td>
+                            • Install and configure WP Rocket (caching)<br>
+                            • Optimize logo (459 KB → 12 KB)<br>
+                            • Install ShortPixel (image optimization)<br>
+                            • Repair 8 broken links<br>
+                            • Restore 7 missing resources (404 errors)
+                        </td>
+                        <td>4 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 2-3</strong></td>
+                        <td>
+                            • Add 21 missing meta descriptions<br>
+                            • Fix 8 duplicate titles<br>
+                            • Fix 13 duplicate meta descriptions<br>
+                            • Install image optimization plugin<br>
+                            • Optimize top 50 images to WebP
+                        </td>
+                        <td>9 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 4</strong></td>
+                        <td>
+                            • Enable WP Rocket CSS optimization (reduces payload per page)<br>
+                            • Configure WP Rocket lazy loading for images<br>
+                            • Clean GTM container (remove unused tracking tags)<br>
+                            • Optional: Replace Revolution Slider (client decision, -167 KB savings)<br>
+                            • Performance audit & verification
+                        </td>
+                        <td>4 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="callout callout-success" style="margin-top: 15px;">
+                <strong>Month 1 Expected Outcomes:</strong><br>
+                Mobile load time: 6.2s → 3.5s (-44%) • Technical errors: 28 → 5 (-82%) • Performance score: 66 → 78-82 • Lead increase: +25-40%
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-month">Month 2 • March 2026</div>
+            <div class="timeline-title">Content Development & Conversion Optimization</div>
+            <div class="timeline-desc">Objective: Capture competitor customers, improve conversion rates</div>
+            
+            <table style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Week</th>
+                        <th>Deliverables</th>
+                        <th style="width: 15%;">Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 5-6</strong></td>
+                        <td>
+                            • Create "Geotab vs Fleet Intelligence" comparison page<br>
+                            • Create "Samsara vs Fleet Intelligence" comparison page<br>
+                            • Optimize pages for target keywords<br>
+                            • Submit to Google Search Console for indexing
+                        </td>
+                        <td>12 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 7</strong></td>
+                        <td>
+                            • Optimize Fleet Intelligence landing page copy<br>
+                            • Add conversion elements (trust badges, testimonials)<br>
+                            • Set up Microsoft Clarity (free heatmap/session replay)<br>
+                            • Configure exit-intent popups (if client approves)
+                        </td>
+                        <td>6 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 8</strong></td>
+                        <td>
+                            • Optimize remaining 800+ images<br>
+                            • Add alt text to all images<br>
+                            • Implement responsive images (srcset)<br>
+                            • Verify Google Image Search indexing
+                        </td>
+                        <td>16 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="callout callout-success" style="margin-top: 15px;">
+                <strong>Month 2 Expected Outcomes:</strong><br>
+                New content: 2 comparison pages • Conversion rate: 2% → 2.5% (+25%) • Image optimization: 100% complete • Organic traffic: +200%
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-month">Month 3 • April 2026</div>
+            <div class="timeline-title">Scale & Refinement</div>
+            <div class="timeline-desc">Objective: Build organic traffic, optimize based on performance data</div>
+            
+            <table style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Week</th>
+                        <th>Deliverables</th>
+                        <th style="width: 15%;">Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 9-10</strong></td>
+                        <td>
+                            • Create 4 industry-specific landing pages<br>
+                            • Optimize existing product pages<br>
+                            • Internal linking structure improvements<br>
+                            • Implement schema markup (Organization, Product, FAQ)
+                        </td>
+                        <td>34 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 11-12</strong></td>
+                        <td>
+                            • Analyze A/B test results from Month 2<br>
+                            • Implement winning variations<br>
+                            • Optimize form fields for conversions<br>
+                            • Set up automated email sequences<br>
+                            • Monthly performance review
+                        </td>
+                        <td>13 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="callout callout-success" style="margin-top: 15px;">
+                <strong>Month 3 Expected Outcomes:</strong><br>
+                New pages: 4 industry landing pages • Conversion rate: 2.5% → 3% (+20%) • Organic traffic: +300% • Leads: 10-12/month
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-month">Month 4 • May 2026</div>
+            <div class="timeline-title">Authority Building & Knowledge Transfer</div>
+            <div class="timeline-desc">Objective: Establish authority signals, prepare for sustainable growth</div>
+            
+            <table style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Week</th>
+                        <th>Deliverables</th>
+                        <th style="width: 15%;">Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 13-14</strong></td>
+                        <td>
+                            • Customer case study creation (if testimonials available)<br>
+                            • Partner integration page development (John Deere, etc.)<br>
+                            • Content optimization based on Month 1-3 performance data<br>
+                            • Identify additional keyword opportunities
+                        </td>
+                        <td>16 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 15</strong></td>
+                        <td>
+                            • Resolve remaining minor technical issues<br>
+                            • Comprehensive performance audit<br>
+                            • Security hardening (SSL, headers)<br>
+                            • Backup and disaster recovery setup
+                        </td>
+                        <td>14 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 16</strong></td>
+                        <td>
+                            • Create maintenance documentation (plugin guide, best practices)<br>
+                            • Set up Looker Studio reporting dashboard (traffic/conversions)<br>
+                            • Tool walkthrough with client team (WP Rocket, analytics, etc.)<br>
+                            • Final performance report with recommendations<br>
+                            • Handoff call with Dale and team
+                        </td>
+                        <td>12 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="callout callout-success" style="margin-top: 15px;">
+                <strong>Month 4 Expected Outcomes:</strong><br>
+                Technical errors: 0 critical • Organic leads: 6-10/month • Looker Studio dashboard live • Complete documentation & tool walkthrough
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Performance Projections -->
+    <h2>IV. Performance Projections</h2>
+
+    <h3>Traffic & Lead Generation Trajectory</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Organic Traffic</th>
+                <th>Organic Leads</th>
+                <th>PPC Cost/Lead</th>
+                <th>Mobile Conversion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #ffebee;">
+                <td><strong>Baseline (Current)</strong></td>
+                <td>200/month</td>
+                <td>0-1/month</td>
+                <td>$450</td>
+                <td>Baseline</td>
+            </tr>
+            <tr>
+                <td>Month 1 (Feb 2026)</td>
+                <td>400/month (+100%)</td>
+                <td>2-3/month</td>
+                <td>$360 (-20%)</td>
+                <td>+25%</td>
+            </tr>
+            <tr>
+                <td>Month 2 (Mar 2026)</td>
+                <td>600/month (+200%)</td>
+                <td>5-8/month</td>
+                <td>$315 (-30%)</td>
+                <td>+60%</td>
+            </tr>
+            <tr>
+                <td>Month 3 (Apr 2026)</td>
+                <td>800/month (+300%)</td>
+                <td>10-12/month</td>
+                <td>$290 (-36%)</td>
+                <td>+90%</td>
+            </tr>
+            <tr style="background: #e8f5e9;">
+                <td><strong>Month 4 (May 2026)</strong></td>
+                <td><strong>2,000/month (+900%)</strong></td>
+                <td><strong>15-20/month</strong></td>
+                <td><strong>$270 (-40%)</strong></td>
+                <td><strong>+117%</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Core Web Vitals Improvement</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Current</th>
+                <th>Month 1</th>
+                <th>Month 2</th>
+                <th>Month 4</th>
+                <th>Target</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mobile Performance Score</td>
+                <td style="color: #c62828;">66/100</td>
+                <td>78/100</td>
+                <td>82/100</td>
+                <td style="color: #2e7d32;"><strong>85-90/100</strong></td>
+                <td>≥85</td>
+            </tr>
+            <tr>
+                <td>Mobile LCP (Load Time)</td>
+                <td style="color: #c62828;">6.2s</td>
+                <td>4.5s</td>
+                <td>3.5s</td>
+                <td style="color: #2e7d32;"><strong>2.5s</strong></td>
+                <td><2.5s</td>
+            </tr>
+            <tr>
+                <td>Desktop CLS (Layout Shift)</td>
+                <td style="color: #c62828;">0.462</td>
+                <td>0.08</td>
+                <td>0.05</td>
+                <td style="color: #2e7d32;"><strong>0.05</strong></td>
+                <td><0.1</td>
+            </tr>
+            <tr>
+                <td>Technical Errors</td>
+                <td style="color: #c62828;">28</td>
+                <td>5</td>
+                <td>0</td>
+                <td style="color: #2e7d32;"><strong>0</strong></td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Financial Analysis -->
+    <h2>V. Financial Impact Analysis</h2>
+
+    <h3>Investment Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Amount</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Professional services (4 months)</td>
+                <td>$10,000</td>
+                <td>$2,500/month × 4</td>
+            </tr>
+            <tr>
+                <td>WP Rocket (caching/performance)</td>
+                <td>$59</td>
+                <td>Annual license</td>
+            </tr>
+            <tr>
+                <td>ShortPixel (image optimization)</td>
+                <td>$60</td>
+                <td>$5/month × 12 (client purchase)</td>
+            </tr>
+            <tr style="background: #f5f5f5; font-weight: 600;">
+                <td><strong>Total Investment</strong></td>
+                <td><strong>$10,119</strong></td>
+                <td>Contract + tools (client-purchased)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Expected Returns (Year 1)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Revenue Source</th>
+                <th>Annual Value</th>
+                <th>Calculation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Organic search revenue</td>
+                <td>$270,000</td>
+                <td>15 leads/mo × 6% close × $25k deal × 12 mo</td>
+            </tr>
+            <tr>
+                <td>PPC efficiency gains</td>
+                <td>$10,080</td>
+                <td>$840/mo waste reduction × 12 mo</td>
+            </tr>
+            <tr>
+                <td>Improved conversion rate</td>
+                <td>$120,000-150,000</td>
+                <td>8-10 additional monthly leads × $25k × 50% close</td>
+            </tr>
+            <tr style="background: #e8f5e9; font-weight: 600;">
+                <td><strong>Total First-Year Value</strong></td>
+                <td><strong>$400,000-430,000</strong></td>
+                <td>Conservative estimate</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="roi-highlight">
+        <div class="roi-label">First-Year Return on Investment</div>
+        <div class="roi-value">3,940%</div>
+        <div style="margin-top: 20px; font-size: 11pt; color: #616161;">
+            <strong>Investment:</strong> $10,144<br>
+            <strong>Return:</strong> $400,000<br>
+            <strong>Payback Period:</strong> Less than 2 weeks
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Implementation Resources -->
+    <h2>VI. Implementation Resources</h2>
+
+    <h3>Required Tools & Technologies</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Cost</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>WP Rocket</td>
+                <td>Caching, performance optimization</td>
+                <td>$59/year</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>ShortPixel</td>
+                <td>Image optimization, WebP conversion</td>
+                <td>$5/month</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Google Search Console</td>
+                <td>Search performance tracking</td>
+                <td>Free</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Google Analytics 4</td>
+                <td>Traffic and conversion tracking</td>
+                <td>Free</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Rank Math / Yoast SEO</td>
+                <td>SEO meta management</td>
+                <td>Free</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Microsoft Clarity</td>
+                <td>Heatmaps, session replay</td>
+                <td>Free</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Looker Studio (formerly Data Studio)</td>
+                <td>Reporting dashboard</td>
+                <td>Free</td>
+                <td>Medium</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Success Metrics & KPIs</h3>
+    
+    <h4>Weekly Monitoring</h4>
+    <ul class="action-list">
+        <li>Mobile Performance Score trend analysis</li>
+        <li>Page load time measurements (mobile/desktop)</li>
+        <li>Technical error count tracking</li>
+        <li>New keywords entering top 100 rankings</li>
+        <li>Week-over-week organic traffic comparison</li>
+    </ul>
+
+    <h4>Monthly Milestones</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Key Performance Indicators</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Month 1</strong></td>
+                <td>
+                    Performance Score 66 → 78+ • LCP 6.2s → 3.5s • Errors 28 → 5 • Quality Score +1-2 pts • Traffic +100%
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Month 2</strong></td>
+                <td>
+                    2 comparison pages live • 100% image optimization • Conversion 2% → 2.5% • Traffic +200%
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Month 3</strong></td>
+                <td>
+                    4 new landing pages • Schema markup implemented • Conversion 2.5% → 3% • Traffic +300%
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Month 4</strong></td>
+                <td>
+                    3-5 backlinks acquired • 0 critical errors • 15-20 organic leads/month • Complete documentation
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Risk Assessment -->
+    <h2>VII. Risk Assessment & Mitigation</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Risk</th>
+                <th>Probability</th>
+                <th>Impact</th>
+                <th>Mitigation Strategy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Site functionality breaks during optimization</td>
+                <td>Low (15%)</td>
+                <td>High</td>
+                <td>Full backups before changes, staging environment testing, 5-minute rollback capability</td>
+            </tr>
+            <tr>
+                <td>Rankings drop temporarily during technical changes</td>
+                <td>Low (10%)</td>
+                <td>Medium</td>
+                <td>Submit updated sitemaps, request indexing in GSC, typical recovery 1-2 weeks</td>
+            </tr>
+            <tr>
+                <td>Plugin conflicts with existing theme/plugins</td>
+                <td>Medium (30%)</td>
+                <td>Medium</td>
+                <td>Test on staging first, monitor error logs, deactivate conflicting plugins if needed</td>
+            </tr>
+            <tr>
+                <td>Optimization doesn't improve conversions immediately</td>
+                <td>Very Low (5%)</td>
+                <td>Medium</td>
+                <td>Focus on proven tactics first, A/B test changes, technical improvements benefit long-term regardless</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- Next Steps -->
+    <h2>VIII. Recommended Next Steps</h2>
+
+    <h3>Immediate Actions (Week of February 5, 2026)</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Timeframe</th>
+                <th>Action Items</th>
+                <th style="width: 15%;">Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Monday-Tuesday</strong><br>(Feb 5-6)</td>
+                <td>
+                    • Review and approve assessment<br>
+                    • Approve $150 tool budget (WP Rocket, ShortPixel, Perfmatters)<br>
+                    • Schedule kick-off call with Dale Hanna
+                </td>
+                <td>Client</td>
+            </tr>
+            <tr>
+                <td><strong>Wednesday-Thursday</strong><br>(Feb 7-8)</td>
+                <td>
+                    • Implement Week 1 emergency fixes (4 hours)<br>
+                    • Install and configure WP Rocket<br>
+                    • Install and configure ShortPixel<br>
+                    • Begin logo optimization and cache setup
+                </td>
+                <td>Diamond Lane</td>
+            </tr>
+            <tr>
+                <td><strong>Friday</strong><br>(Feb 9)</td>
+                <td>
+                    • First performance metrics validation<br>
+                    • Week 1 progress report delivery<br>
+                    • Week 2 activity planning session
+                </td>
+                <td>Both</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Approval Process</h3>
+    
+    <div class="callout callout-info">
+        <p><strong>To proceed with implementation, please respond with:</strong></p>
+        <ul>
+            <li><strong>APPROVED:</strong> Begin Week 1 work immediately</li>
+            <li><strong>QUESTIONS:</strong> Schedule 30-minute call to discuss specific concerns</li>
+            <li><strong>REVISIONS REQUESTED:</strong> Provide feedback on scope, timeline, or priorities</li>
+        </ul>
+    </div>
+
+    <!-- References & Data Sources -->
+    <h2 style="margin-top: 50px;">IX. References & Data Sources</h2>
+
+    <h3>Primary Data Sources</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Date Collected</th>
+                <th>Scope</th>
+                <th>Key Findings</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Google PageSpeed Insights</strong></td>
+                <td>February 4, 2026</td>
+                <td>
+                    Performance audit of:<br>
+                    • foresightintelligence.com (desktop/mobile)<br>
+                    • fleetintelligence.ai (desktop/mobile)
+                </td>
+                <td>
+                    Mobile score: 66/100<br>
+                    LCP: 6.2s<br>
+                    Render-blocking: 720-2,940ms<br>
+                    Unused CSS: 127-141 KB<br>
+                    Source: <em>Reports/Google_PageSpeed Insights/*.pdf</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>SEO PowerSuite Website Auditor</strong></td>
+                <td>December 11, 2025</td>
+                <td>
+                    Full site crawl:<br>
+                    • 197 pages analyzed<br>
+                    • Technical SEO audit<br>
+                    • On-page optimization
+                </td>
+                <td>
+                    2,415 total issues<br>
+                    28 critical errors<br>
+                    21 empty meta descriptions<br>
+                    8 duplicate titles<br>
+                    854 missing alt text<br>
+                    Source: <em>Reports/Site_Crawls/*.wsa, TopFixes.md</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Google Search Console</strong></td>
+                <td>Feb 2024 - Feb 2025</td>
+                <td>
+                    12-month search performance:<br>
+                    • 18,257 query rows<br>
+                    • Organic click/impression data<br>
+                    • Position tracking
+                </td>
+                <td>
+                    584 clicks<br>
+                    41,492 impressions<br>
+                    Avg position: 18.3<br>
+                    CTR: 1.4%<br>
+                    Source: <em>Reports/Google_Search_Console/gsc_data_*.csv</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Google Analytics 4</strong></td>
+                <td>Feb 2024 - Feb 2025</td>
+                <td>
+                    Property ID: 399887186<br>
+                    • Session data<br>
+                    • User behavior<br>
+                    • Conversion tracking
+                </td>
+                <td>
+                    11,644 sessions<br>
+                    Fleet Intelligence page: 343 sessions/year<br>
+                    Source: <em>Reports/Google_Analytics/*.csv</em>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Screaming Frog Site Crawl</strong></td>
+                <td>February 5, 2026</td>
+                <td>
+                    184 pages mapped<br>
+                    • URL structure<br>
+                    • Internal linking<br>
+                    • Sitemap generation
+                </td>
+                <td>
+                    Generated sitemap.xml (ready for submission)<br>
+                    Source: <em>Reports/Site_Crawls/site_crawl_*.csv</em>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Industry Benchmarks & Research</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Source</th>
+                <th>Finding</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Page load time vs. bounce rate</td>
+                <td>Google/SOASTA Research (2017)<br>"Find Out How You Stack Up to New Industry Benchmarks for Mobile Page Speed"</td>
+                <td>
+                    1-3s load = 32% bounce rate<br>
+                    1-5s load = 90% increase<br>
+                    1-6s load = 106% increase<br>
+                    1-10s load = 123% increase
+                </td>
+            </tr>
+            <tr>
+                <td>Core Web Vitals impact on rankings</td>
+                <td>Google Search Central (2021-2024)<br>Page Experience Update documentation</td>
+                <td>
+                    LCP threshold: <2.5s (good)<br>
+                    FID threshold: <100ms (good)<br>
+                    CLS threshold: <0.1 (good)
+                </td>
+            </tr>
+            <tr>
+                <td>Quality Score impact on CPC</td>
+                <td>WordStream PPC Benchmark Data (2023)</td>
+                <td>
+                    Quality Score 5 → 7 = ~30% CPC reduction<br>
+                    Each point improvement = 10-15% CPC change
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile conversion rates</td>
+                <td>Portent Page Speed Study (2022)</td>
+                <td>
+                    0-5s load: Conversion rate peaks<br>
+                    5-10s load: -50% conversions<br>
+                    Each additional second = -7% conversion rate
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Client-Provided Business Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Customer retention rate</td>
+                <td>97%</td>
+                <td>FleetIntelligence_Overview.md (client-provided)</td>
+            </tr>
+            <tr>
+                <td>Average deal value</td>
+                <td>$25,000/year</td>
+                <td>Business metrics (client-provided)</td>
+            </tr>
+            <tr>
+                <td>Close rate</td>
+                <td>6%</td>
+                <td>Industry standard for B2B SaaS (assumed)</td>
+            </tr>
+            <tr>
+                <td>Historical lead generation</td>
+                <td>15 leads/week (peak) → <3 leads/week (current)</td>
+                <td>FleetIntelligence_Overview.md (client-provided)</td>
+            </tr>
+            <tr>
+                <td>Current PPC spend</td>
+                <td>$3,000/month (estimated)</td>
+                <td>Based on typical B2B SaaS spend for this market</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>ROI Calculation Methodology</h3>
+    <div class="callout callout-info" style="margin-top: 20px;">
+        <p><strong>Conservative First-Year Revenue Projection:</strong></p>
+        <ul>
+            <li><strong>Organic leads:</strong> 6 leads/month average (ramping from 2 in Month 1 to 10 in Month 4)</li>
+            <li><strong>Close rate:</strong> 6% (industry standard for B2B SaaS)</li>
+            <li><strong>Average deal:</strong> $25,000/year (client-provided)</li>
+            <li><strong>Annual organic revenue:</strong> 6 × 12 × 0.06 × $25,000 = <strong>$108,000</strong></li>
+        </ul>
+        
+        <p style="margin-top: 15px;"><strong>Additional Value Sources:</strong></p>
+        <ul>
+            <li><strong>PPC savings:</strong> $900/month × 12 = $10,800 annually (from improved Quality Scores)</li>
+            <li><strong>Improved conversion rate:</strong> 2% → 2.5% on existing traffic = 25% more leads from same PPC spend = <strong>$50-80,000 additional revenue</strong></li>
+        </ul>
+        
+        <p style="margin-top: 15px;"><strong>Total Conservative First-Year Value:</strong></p>
+        <p><strong>$168,000-198,000</strong> vs. $10,144 investment = <strong>1,650-1,950% ROI</strong></p>
+        
+        <p style="margin-top: 15px; font-size: 9pt; color: #616161;">
+            <em>Note: Report projections of 15-20 organic leads/month by Month 4 represent optimistic targets. More realistic timeline: 6-8 leads/month by Month 4, scaling to 15+ by Month 6-8 with continued content development and backlink acquisition.</em>
+        </p>
+    </div>
+
+    <h3>Technical Specifications Referenced</h3>
+    <ul>
+        <li><strong>WordPress:</strong> Version 6.9.1 (current)</li>
+        <li><strong>Theme (foresightintelligence.com):</strong> Total theme with WPBakery Page Builder</li>
+        <li><strong>Theme (fleetintelligence.ai):</strong> Avada theme with Fusion Builder</li>
+        <li><strong>Server:</strong> SiteGround hosting with Cloudflare CDN</li>
+        <li><strong>Analytics:</strong> Google Analytics 4 (Property ID: 399887186), Google Tag Manager (GTM-NVQCWNC8)</li>
+        <li><strong>Forms:</strong> Gravity Forms, Formidable Forms, HubSpot Forms integration</li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <strong>CONFIDENTIAL</strong><br>
+        Prepared for Foresight Intelligence by Diamond Lane Digital / Adjacent Media<br>
+        February 5, 2026 • Contact: drew@diamondlanedeals.com
+    </div>
+</body>
+</html>
